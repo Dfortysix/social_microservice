@@ -13,6 +13,7 @@ python-jose[cryptography]==3.3.0  # Dùng để tạo/giải mã JWT
 # Cấu hình & tiện ích
 python-dotenv==1.0.1
 pydantic==2.7.1
+email-validator==2.1.1
 
 # Kiểm thử (nếu cần)
 httpx==0.27.0
