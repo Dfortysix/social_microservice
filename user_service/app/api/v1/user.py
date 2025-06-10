@@ -6,6 +6,7 @@ from app.db.session import AsyncSessionLocal
 from app.services.auth import verify_password, create_access_token
 from app.dependencies.auth import get_current_user
 from app.dependencies.db import get_db
+from fastapi.security import OAuth2PasswordRequestForm
 
 
 router = APIRouter(prefix="/users", tags=["Users"])
@@ -18,9 +19,9 @@ async def register(user: UserCreate, db: AsyncSession = Depends(get_db)):
     return await create_user(db, user)
 
 @router.post("/login", response_model=Token)
-async def login(user: UserCreate, db: AsyncSession = Depends(get_db)):
-    db_user = await get_user_by_email(db, user.email)
-    if not db_user or not verify_password(user.password, db_user.hashed_password):
+async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(get_db)):
+    db_user = await get_user_by_email(db, form_data.username)
+    if not db_user or not verify_password(form_data.password, db_user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     access_token = create_access_token({"sub": db_user.email})
     return {"access_token": access_token, "token_type": "bearer"}
