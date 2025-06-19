@@ -5,8 +5,8 @@ class PostCreate(BaseModel):
     content: str
 
 class PostUpdate(BaseModel):
-    title: str | None = None
-    content: str | None = None
+    title: str
+    content: str
 
 class PostOut(BaseModel):
     id: int
