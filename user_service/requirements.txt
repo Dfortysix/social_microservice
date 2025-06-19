@@ -20,3 +20,15 @@ httpx==0.27.0
 pytest==8.2.0
 
 python-multipart
+# OAuth2 với Google
+authlib==1.3.0  # Hỗ trợ đăng nhập qua Google OAuth2
+itsdangerous
+# Gửi email (qua SMTP Gmail)
+aiosmtplib
+
+# Message Queue - Dùng Redis làm Broker
+celery[redis] # Task queue system
+redis     # Python client cho Redis
+
+# (Tuỳ chọn) Log nâng cao
+loguru
